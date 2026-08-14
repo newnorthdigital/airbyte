@@ -1,5 +1,60 @@
 # Facebook Pages Migration Guide
 
+## Upgrading to 3.0.0
+
+Version `v3.0.0` removes the Page and Post Insights metrics that Meta has deprecated, and requests their
+replacements instead.
+
+Meta retired the `page_impressions_*_unique` and `post_impressions_*_unique` metric family. Because Graph API
+rejects the **entire** Insights request when any single requested metric is invalid, both insights streams —
+and, before this version, source setup itself — failed with `(#100) The value must be a valid insights metric`,
+surfaced as `HTTP Status Code: 400. Error: Bad request`.
+
+[Deprecated metrics API docs](https://developers.facebook.com/docs/platforminsights/page/deprecated-metrics/).
+
+**Page Insights Stream and Post Insights Stream** — this version removes deprecated metrics, so records for
+those metrics are no longer emitted. Only total reach has a replacement (`page_total_media_view_unique` /
+`post_total_media_view_unique`); the paid, viral, non-viral, fan, and organic reach breakdowns were retired by
+Meta with no equivalent and are permanently unavailable. The schemas are unchanged, so refreshing the schema is
+not needed. Clearing the affected streams is recommended only if you want all data in one consistent format —
+otherwise no action is needed. Please follow the Migration Steps below if you choose to clear.
+
+**Page Insights Stream Metrics:**
+
+_Added:_
+
+- `page_total_media_view_unique`
+
+_Removed:_
+
+- `page_impressions_unique`
+- `page_impressions_paid_unique`
+- `page_impressions_viral_unique`
+- `page_impressions_nonviral_unique`
+
+**Post Insights Stream Metrics:**
+
+_Added:_
+
+- `post_total_media_view_unique`
+
+_Removed:_
+
+- `post_impressions_unique`
+- `post_impressions_paid_unique`
+- `post_impressions_fan_unique`
+- `post_impressions_organic_unique`
+- `post_impressions_viral_unique`
+- `post_impressions_nonviral_unique`
+
+### Migration Steps
+
+#### Clearing data for Page Insights and Post Insights Streams
+
+To clear data for a single stream, navigate to a Connection's status page, click the three grey dots next to any
+stream, and select "Clear data". This will clear the data for just that stream. You will then need to sync the
+connection again in order to reload data for that stream.
+
 ## Upgrading to 2.0.0
 
 Version `v2.0.0` updates the API version from v23 to v24.

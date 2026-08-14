@@ -144,6 +144,7 @@ If you use Airbyte Cloud and your organization restricts access to specific IPs,
 
 | Version | Date       | Pull Request                                                   | Subject                                                                                                                                                                |
 |:--------|:-----------|:---------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 3.0.0 | 2026-08-14 | [84408](https://github.com/airbytehq/airbyte/pull/84408) | Remove Page/Post Insights metrics deprecated by Meta and request `page_total_media_view_unique` / `post_total_media_view_unique` instead; fail fast with Meta's own message on invalid-metric errors. |
 | 2.1.1 | 2026-05-22 | [78342](https://github.com/airbytehq/airbyte/pull/78342) | Classify Facebook app-approval errors as configuration errors. |
 | 2.1.0 | 2026-02-09 | [72949](https://github.com/airbytehq/airbyte/pull/72949) | Use QueryProperties with JsonSchemaPropertySelector to limit API field requests to user-selected fields; add configurable page_size for post and post_insights streams |
 | 2.0.4 | 2026-01-29 | [72253](https://github.com/airbytehq/airbyte/pull/72253) | Remove product_catalogs from fields request parameter |

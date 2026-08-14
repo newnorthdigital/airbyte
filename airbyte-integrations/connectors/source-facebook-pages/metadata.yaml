@@ -10,7 +10,7 @@ data:
   connectorSubtype: api
   connectorType: source
   definitionId: 010eb12f-837b-4685-892d-0a39f76a98f5
-  dockerImageTag: 2.1.1
+  dockerImageTag: 3.0.0
   dockerRepository: airbyte/source-facebook-pages
   documentationUrl: https://docs.airbyte.com/integrations/sources/facebook-pages
   githubIssueLabel: source-facebook-pages
@@ -30,6 +30,13 @@ data:
   supportLevel: community
   releases:
     breakingChanges:
+      3.0.0:
+        message: >-
+          Meta deprecated the `page_impressions_*_unique` and `post_impressions_*_unique` metrics, and Graph API rejects the entire Insights request when any one requested metric is invalid. This version removes those metrics from the `Page Insights` and `Post Insights` streams and requests `page_total_media_view_unique` / `post_total_media_view_unique` instead. Records for the removed metrics will no longer be emitted.
+        upgradeDeadline: "2026-09-11"
+        scopedImpact:
+          - scopeType: stream
+            impactedScopes: ["page_insights", "post_insights"]
       2.0.0:
         message: >-
           This version updates the API version from v23 to v24. Deprecated fields have been removed and new fields have been added for the streams `Post`, `Post Insights` and `Page Insights`.
